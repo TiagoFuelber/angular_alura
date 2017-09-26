@@ -11,6 +11,10 @@ angular.module("alurapic", ['minhasDiretivas', 'ngAnimate', 'ngRoute'])
                 templateUrl: 'partials/foto.html',
                 controller: 'FotoController'
             })
+            .when('/foto/edit/:fotoId', {
+                templateUrl: 'partials/foto.html',
+                controller: 'FotoController'
+            })
             .otherwise({
                 redirectTo: '/fotos'
             });
