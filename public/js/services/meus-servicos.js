@@ -7,31 +7,42 @@ angular.module('meusServicos', ['ngResource'])
 		}
 	});
 })
-.factory('cadastroDeFoto', function(recursoFoto, $q){
+.factory('cadastroDeFotos', function(recursoFoto, $q){
 
-	var service = {};
+	var servico = {};
 
-	service.cadastrar = function(foto) {
+	servico.cadastrar = function(foto) {
 
 		return $q(function(resolve, reject){
 
 			if(foto._id) {
 				recursoFoto.update({fotoId: foto._id}, foto, function() {
 					resolve({
-
+						mensagem: 'Foto ' + foto.titulo + ' atualizada com sucesso',
+						inclusao: false
 					});
 				}, function(erro) {
-					consoel.log(erro);
+					console.log(erro);
 					reject({
-						mensagem: 'Não foi possível utilizar '
+						mensagem: 'Não foi possível utilizar a foto' + foto.titulo
 					});
 				});
 			} else {
-				recursoFoto.save();
+				recursoFoto.save(foto, function(){
+					resolve({
+						mensagem: 'Foto ' + foto.titulo + ' incluída com sucesso',
+						inclusao: true
+					});
+				}, function() {
+					console.log(erro);
+					reject({
+						mensagem: "Não foi possivel incluir a foto" + foto.titulo
+					});
+				});
 			}
-
 		})
-
 	}
+
+	return servico;
 
 });

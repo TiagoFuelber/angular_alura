@@ -19,11 +19,5 @@ angular.module("alurapic").controller("FotosController", function($scope, recurs
 			console.log(erro);
 			$scope.mensagem = 'Não foi possível deletar a foto' + foto.titulo;
 		});
-
-		// $http.delete('v1/fotos/' + foto._id)
-		// .success(function(){
-		// })
-		// .error(function(erro) {
-		// });
     };
 });	
